@@ -18,6 +18,8 @@ function main() {
 	// convert nodeList to array
 	flags_with_viewbox.push.apply(flags_with_viewbox, document.querySelectorAll("svg[viewBox]"))
 
+	console.log("antal flag uden viewBox", flags_without_viewbox.length, "antal flag med viewBox", flags_with_viewbox.length)
+
 	//setViewBox( getSizes(flags_without_viewbox) ).concat(flags_with_viewbox)
 	const flags = getSizes(flags_without_viewbox)
 
