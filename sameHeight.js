@@ -1,18 +1,34 @@
 "use strict"
 
-const flags_without_viewbox = document.querySelectorAll("svg:not([viewBox])")
-const flags_with_viewbox = []
-flags_with_viewbox.push.apply(flags_with_viewbox, document.querySelectorAll("svg[viewBox]"))
+const flags = main()
+document.querySelector(".info-box")
+	.addEventListener("submit", event => {
+		event.preventDefault()
 
-//setViewBox( getSizes(flags_without_viewbox) ).concat(flags_with_viewbox)
-var flags = getSizes(flags_without_viewbox)
-console.log(flags[0], flags.length)
+		const height = document.querySelector(".info-box input[type='number']").value
 
-setViewBox(flags)
+		setHeight(flags, height)
+	})
 
-setHeight(
-	flags.map(flag=> flag.node).concat(flags_with_viewbox)
-)
+
+function main() {
+
+	const flags_without_viewbox = document.querySelectorAll("svg:not([viewBox])")
+	const flags_with_viewbox = []
+	// convert nodeList to array
+	flags_with_viewbox.push.apply(flags_with_viewbox, document.querySelectorAll("svg[viewBox]"))
+
+	//setViewBox( getSizes(flags_without_viewbox) ).concat(flags_with_viewbox)
+	const flags = getSizes(flags_without_viewbox)
+
+	//console.log(flags[0], flags.length)
+
+	setViewBox(flags)
+
+	return setHeight(
+		flags.map(flag=> flag.node).concat(flags_with_viewbox)
+	)
+}
 
 
 function getSizes(svgs) {
@@ -33,12 +49,12 @@ function setViewBox(flags) {
 	return flags
 }
 
-function setHeight(flags) {
+function setHeight(flags, height = 60) {
 	if(!Array.isArray(flags)) throw new TypeError("flags is not an array")
 
 	flags.forEach(flag => {
 		flag.removeAttribute("width")
-		flag.setAttribute("height", "60px")
+		flag.setAttribute("height", `${height}px`)
 	})
 
 	return flags

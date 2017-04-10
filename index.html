@@ -7,13 +7,24 @@
     <style>
       svg {
         display:block;
+        margin: 1em;
+      }
+
+      .info-box {
+        position: fixed;
+        right: 1rem;
       }
     </style>
 	</head>
 	<body>
 
-
-
+<form class="info-box">
+  <fieldset>
+    <legend>Højde</legend>
+    <label>Sæt højde: <input type="number" value="60" max-value="1000" autofocus>px</label>
+    <input type="submit">
+  </fieldset>
+</form>
 
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="700">
 
